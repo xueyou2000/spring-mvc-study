@@ -11,6 +11,7 @@ public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServl
         System.out.println("=======================MyWebAppInitializer========================");
     }
 
+    // 不用 RootConfig 可以返回 null
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[] { RootConfig.class };
