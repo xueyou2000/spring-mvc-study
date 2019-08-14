@@ -8,7 +8,7 @@ import javax.servlet.Filter;
 public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     public MyWebAppInitializer() {
-        System.out.println("=======================xx========================");
+        System.out.println("=======================MyWebAppInitializer========================");
     }
 
     @Override

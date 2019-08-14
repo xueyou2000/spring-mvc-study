@@ -11,25 +11,26 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Spring MVC 配置
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.xueyou.controller", useDefaultFilters = false)
+@ComponentScan(basePackages = "com.xueyou.controller", useDefaultFilters = false, includeFilters = @ComponentScan.Filter(Controller.class))
 public class SpringMvcConfig implements WebMvcConfigurer {
 
     public SpringMvcConfig() {
-        System.out.println("======================xx=======================");
+        System.out.println("======================SpringMvcConfig=======================");
     }
 
     @Bean
@@ -51,7 +52,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         config.setSerializerFeatures(SerializerFeature.WriteMapNullValue);//保留空的字段
         // SerializerFeature.WriteNullStringAsEmpty,//String null -> ""
         // SerializerFeature.WriteNullNumberAsZero//Number null -> 0
-        // 按需配置，更多参考FastJson文档哈
+        // 按需配置，更多参考FastJson文档
     	// 全局指定了日期格式
         config.setDateFormat("yyyy-MM-dd HH:mm:ss");
         converter.setFastJsonConfig(config);
@@ -86,7 +87,6 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     /**
      * 上传文件解析
      *
-     * @return
      */
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
